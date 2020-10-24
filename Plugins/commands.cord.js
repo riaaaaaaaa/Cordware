@@ -23,12 +23,14 @@ module.exports = new Plugin({
                         CordAPI.Requests.MakeGetRequest('https://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true', "", (response) => 
                         {
                             var shiba = JSON.parse(response)[0];
-                            CordAPI.Requests.MakePostRequest(`https://discord.com/api/v8/channels/${channelId}/messages`, 
+                            var messageBody = 
                             {
                                 content: shiba,
                                 nonce: null,
                                 tts: false
-                            }, CordAPI.Modding.FilterWebpackModule("getToken").getToken(), true, () => {});
+                            };
+
+                            CordAPI.Requests.MakePostRequest(`https://discord.com/api/v8/channels/${channelId}/messages`, JSON.stringify(messageBody), CordAPI.Modding.FilterWebpackModule("getToken").getToken(), true, () => {});
                         });
                         message.content = "";
                     break;

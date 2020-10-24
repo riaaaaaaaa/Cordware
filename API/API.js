@@ -111,13 +111,13 @@ CordAPI =
     },
     Requests:
     {
-        MakeGetRequest(url, authorization, callback)
+        MakeGetRequest(url, cors, authorization, callback)
         {
             var request = new XMLHttpRequest();
             request.addEventListener("load", () => {
                 callback(request.responseText);
             });
-            request.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
+            request.open("GET", `${cors ? `https://cors-anywhere.herokuapp.com/${url}` : url}`);
             if (authorization != "") {
                 request.setRequestHeader("Authorization", authorization);
             }

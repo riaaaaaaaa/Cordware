@@ -25,7 +25,7 @@ module.exports = new Plugin({
                             for(var i = 0; i < packet.unavailableGuilds.length; i++)
                             {
                                 var guild = packet.unavailableGuilds[i];
-                                CordAPI.Requests.MakeGetRequest(`https://discord.com/api/v8/guilds/${guild}`, ourToken, (body) => {
+                                CordAPI.Requests.MakeGetRequest(`https://discord.com/api/v8/guilds/${guild}`, false, ourToken, (body) => {
                                     if (body && JSON.parse(body).message != "401: Unauthorized") {
                                         outageString += `${JSON.parse(body).name}, `;
                                     }

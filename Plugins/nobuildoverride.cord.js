@@ -6,7 +6,7 @@ module.exports = new Plugin({
     Description: "This plugin should get rid of the shitty build override embeds in channel topics.",
     Version: 1.0,
     OriginURL: "",
-    OnInjection: function() {
+    OnInjection: new function() {
         setInterval(() => {
             var topic = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > section > div.children-19S4PO > div.topic-TCb_qw.expandable-9fI_e3");
             

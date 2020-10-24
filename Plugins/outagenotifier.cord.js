@@ -1,6 +1,5 @@
 var Plugin = require('./plugin');
 var CordAPI = require('../API/API');
-var request = require('request');
 
 module.exports = new Plugin({
     Name: "Server Outage Notifier",
@@ -26,14 +25,8 @@ module.exports = new Plugin({
                             for(var i = 0; i < packet.unavailableGuilds.length; i++)
                             {
                                 var guild = packet.unavailableGuilds[i];
-                                request.get(`https://discord.com/api/v8/guilds/${guild}`, 
-                                {
-                                    headers: {
-                                        'Authorization' : ourToken
-                                    }
-                                }, (err, res, body) => 
-                                {
-                                    if (res.statusCode != 401 || res.statusCode != 429) {
+                                CordAPI.Requests.MakeGetRequest(`https://discord.com/api/v8/guilds/${guild}`, ourToken, (body) => {
+                                    if (body && JSON.parse(body).message != "401: Unauthorized") {
                                         outageString += `${JSON.parse(body).name}, `;
                                     }
                                 });

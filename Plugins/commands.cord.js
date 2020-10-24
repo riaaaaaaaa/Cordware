@@ -1,6 +1,5 @@
 var Plugin = require('./plugin');
 var CordAPI = require('../API/API');
-var request = require('request');
 
 module.exports = new Plugin({
     Name: "Commands Mod",
@@ -21,15 +20,15 @@ module.exports = new Plugin({
                 switch(words[0])
                 {
                     case "/shibe":
-                        request.get('http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true', {}, (err, res, body) => {
-                            request.post(`https://discord.com/api/v8/channels/${channelId}/messages`,
+                        CordAPI.Requests.MakeGetRequest('http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true', "", (response) => 
+                        {
+                            var shiba = JSON.parse(response)[0];
+                            CordAPI.Requests.MakePostRequest(`https://discord.com/api/v8/channels/${channelId}/messages`, 
                             {
-                                headers: {
-                                    'Authorization' : CordAPI.Modding.FilterWebpackModule("getToken").getToken(),
-                                    'Content-Type' : 'application/json' 
-                                },
-                                body: `{"content":"${JSON.parse(body)[0]}","nonce":null,"tts":false}`
-                            }, (err, res, body) => {})
+                                content: shiba,
+                                nonce: null,
+                                tts: false
+                            }, CordAPI.Modding.FilterWebpackModule("getToken").getToken(), true, () => {});
                         });
                         message.content = "";
                     break;

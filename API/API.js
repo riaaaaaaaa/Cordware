@@ -111,14 +111,32 @@ CordAPI =
     },
     Requests:
     {
-        MakeGetRequest(url, callback)
+        MakeGetRequest(url, authorization, callback)
         {
             var request = new XMLHttpRequest();
             request.addEventListener("load", () => {
                 callback(request.responseText);
             });
-            request.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
+            request.open("GET", url);
+            if (authorization != "") {
+                request.setRequestHeader("Authorization", authorization);
+            }
             request.send();
+        },
+        MakePostRequest(url, body, authorization, json, callback)
+        {
+            var request = new XMLHttpRequest();
+            request.addEventListener("load", () => {
+                callback(request.responseText);
+            });
+            request.open("POST", url);
+            if (json) {
+                request.setRequestHeader("Content-Type", "application/json");
+                if (authorization != "") {
+                    request.setRequestHeader("Authorization", authorization);
+                }
+            }
+            request.send(body);
         }
     }
 };

@@ -7,7 +7,7 @@ module.exports = new Plugin({
     Description: "This plugin gives you commands built into your discord client :^)",
     Version: 1.0,
     OriginURL: "",
-    OnInjection: new function() {
+    OnInjection: function() {
         try 
         {
             var sendMessage = CordAPI.Modding.FilterWebpackModule("sendMessage");

@@ -20,7 +20,6 @@ module.exports = new Plugin({
                         var userId = result.methodArguments[0].userId;
                         var user = CordAPI.Modding.FilterWebpackModule("getUser").getUser(userId);
                         var channel = CordAPI.Modding.FilterWebpackModule("getChannel").getChannel(channelId);
-
                         switch(channel.type)
                         {
                             case 1:
@@ -40,6 +39,6 @@ module.exports = new Plugin({
                 return result.callOriginalMethod(result.methodArguments);
             });
         }
-        catch(err) {}
+        catch(err) { }
     }
 })

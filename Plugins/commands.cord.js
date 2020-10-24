@@ -20,7 +20,7 @@ module.exports = new Plugin({
                 switch(words[0])
                 {
                     case "/shibe":
-                        CordAPI.Requests.MakeGetRequest('http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true', "", (response) => 
+                        CordAPI.Requests.MakeGetRequest('https://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true', "", (response) => 
                         {
                             var shiba = JSON.parse(response)[0];
                             CordAPI.Requests.MakePostRequest(`https://discord.com/api/v8/channels/${channelId}/messages`, 

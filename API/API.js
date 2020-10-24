@@ -117,7 +117,7 @@ CordAPI =
             request.addEventListener("load", () => {
                 callback(request.responseText);
             });
-            request.open("GET", url);
+            request.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
             if (authorization != "") {
                 request.setRequestHeader("Authorization", authorization);
             }

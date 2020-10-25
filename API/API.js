@@ -84,6 +84,7 @@ CordAPI =
             {
                 var plugin = require(path);
                 this.InjectedPlugins[plugin.Name] = plugin;
+                this.InjectedPlugins[plugin.Name].OnInjection();
                 CordAPI.Logging.Log(`Loaded ${plugin.Name} by ${plugin.Author} v${plugin.Version}`);
             }
             catch (error) {

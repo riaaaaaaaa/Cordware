@@ -7,7 +7,7 @@ module.exports = new Plugin({
     Description: "This plugin notifies you about server outages, with details on which servers.",
     Version: 1.0,
     OriginURL: "",
-    OnInjection: new function() {
+    OnInjection: function() {
         try 
         {
             var dispatch = CordAPI.Modding.FilterWebpackModule("dispatch");

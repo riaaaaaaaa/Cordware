@@ -1,4 +1,3 @@
-/*
 var Plugin = require('./plugin');
 var CordAPI = require('../API/API');
 
@@ -9,6 +8,7 @@ module.exports = new Plugin({
     Version: 1.0,
     OriginURL: "",
     OnInjection: function() {
+        /*
         try 
         {
             var dispatch = CordAPI.Modding.FilterWebpackModule("dispatch");
@@ -69,7 +69,6 @@ module.exports = new Plugin({
             });
         } 
         catch(err) {}
+        */
     }
 })
-
-*/

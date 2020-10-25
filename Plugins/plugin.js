@@ -7,7 +7,7 @@ class Plugin
     }
     OnInjection() { }
     OnEjection() { }
-    OnEventCalled(Type, Parameters, Callback) { }
+    OnEventCalled(Type, Parameters) { }
 }
 
 module.exports = Plugin;

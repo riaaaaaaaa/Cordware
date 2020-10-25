@@ -108,6 +108,31 @@ CordAPI =
             catch (error) {
                 CordAPI.Logging.Error(`Failed to load plugins\nException: ${error}\nMake an issue report with this on the github.`);
             }
+        },
+        FirePluginEvent: function(type, parameters)
+        {
+            for(var i = 0; i < this.InjectedPlugins.length; i++)
+            {
+                var plugin = this.InjectedPlugins[i];
+                if (plugin.OnEventCalled && typeof plugin.OnEventCalled == 'function') {
+                    plugin.OnEventCalled(type, parameters);
+                }
+            }
+        },
+        HandlePluginEvents: function()
+        {
+            try 
+            {
+                var dispatch = CordAPI.Modding.FilterWebpackModule("dispatch");
+                CordAPI.Modding.PatchMethod(dispatch, "dispatch", (result) => 
+                {
+                    var arguments = result.methodArguments[0];
+                    var type = arguments.type;
+                    this.FirePluginEvent(type, arguments);
+                    return result.callOriginalMethod(result.methodArguments);
+                });
+            }
+            catch(err) {}
         }
     },
     Requests:

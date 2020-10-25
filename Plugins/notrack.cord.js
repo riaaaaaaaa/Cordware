@@ -9,10 +9,10 @@ module.exports = new Plugin({
     OriginURL: "",
     OnInjection: function() {
         var post = CordAPI.Modding.FilterWebpackModule("post");
-        CordAPI.Modding.PatchMethod.PatchMethod(post, 'post', (b) => 
+        CordAPI.Modding.PatchMethod(post, 'post', (b) => 
         {
             if (b.methodArguments[0].url.includes("/science")) {
-                b.methodArguments[0].url = "https://hahaahhahahahhahafuckyoudiscord.com";
+                return;
             }
             
             return b.callOriginalMethod(b.methodArguments[0], b.methodArguments[1]);

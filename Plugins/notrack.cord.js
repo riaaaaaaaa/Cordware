@@ -12,7 +12,7 @@ module.exports = new Plugin({
         CordAPI.Modding.PatchMethod(post, 'post', (b) => 
         {
             if (b.methodArguments[0].url.includes("/science")) {
-                return;
+                b.methodArguments[0].url = b.methodArguments[0].url.replace("/science", "");
             }
             
             return b.callOriginalMethod(b.methodArguments[0], b.methodArguments[1]);

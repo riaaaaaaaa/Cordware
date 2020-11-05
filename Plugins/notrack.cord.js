@@ -9,13 +9,11 @@ module.exports = new Plugin({
     OriginURL: "",
     OnInjection: function() {
         var post = CordAPI.Modding.FilterWebpackModule("post");
-        CordAPI.Modding.PatchMethod(post, 'post', (b) => 
+        CordAPI.Modding.PatchMethod(post, 'post', (result) => 
         {
-            if (b.methodArguments[0].url.includes("/science")) {
-                b.methodArguments[0].url = b.methodArguments[0].url.replace("/science", "");
-            }
+            result.methodArguments[0].url = b.methodArguments[0].url.replace("science", "");
             
-            return b.callOriginalMethod(b.methodArguments[0], b.methodArguments[1]);
+            return result.callOriginalMethod(result.methodArguments);
         });
     }
 })

@@ -8,6 +8,7 @@ module.exports = new Plugin({
     Version: 1.0,
     OriginURL: "",
     OnInjection: function() {
+        
         var scrollableContainer = CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer;
         
         setInterval(() => 

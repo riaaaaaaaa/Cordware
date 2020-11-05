@@ -19,7 +19,7 @@ module.exports = new Plugin({
                     var elements = document.getElementsByClassName(scrollableContainer);
                     for(var elem in elements) 
                     {
-                        if (elements[elem]) {
+                        if (elements[elem] && elements[elem].className) {
                             elements[elem].className = elements[elem].className.replace(scrollableContainer, "");
                         }
                     } 

@@ -7,8 +7,7 @@ module.exports = new Plugin({
     Description: "Enhances your general discord client user interface and makes things look a lot cleaner/better in my opinion.",
     Version: 1.0,
     OriginURL: "",
-    OnInjection: function() {
-        
+    OnInjection: function() {  
         var scrollableContainer = CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer;
         
         setInterval(() => 

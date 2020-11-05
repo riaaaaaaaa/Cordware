@@ -8,7 +8,6 @@ module.exports = new Plugin({
     Version: 1.0,
     OriginURL: "",
     OnInjection: function() {
-        var startTyping = CordAPI.Modding.FilterWebpackModule("startTyping");
-        CordAPI.Modding.PatchMethod(startTyping, 'startTyping', () => {});
+        CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping');
     }
 })

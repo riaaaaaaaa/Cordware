@@ -8,8 +8,6 @@ module.exports = new Plugin({
     Version: 1.0,
     OriginURL: "",
     OnInjection: function() {
-        var spotifyapi = CordAPI.Modding.FilterWebpackModule("SpotifyAPI");
-        CordAPI.Modding.PatchMethod(spotifyapi, 'pause', () => {});
-        //to-do
+        CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("SpotifyAPI"), 'pause');
     }
 })

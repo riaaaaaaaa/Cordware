@@ -55,6 +55,20 @@ CordAPI =
                 };
             };
         },
+        NullPatchMethod: function(method, name)
+        {
+            try 
+            {
+                if (typeof method[name] == 'function') {
+                    method[name] = function () { }
+                } else {
+                    CordAPI.Logging.Error(`Failed to Null Patch Method: ${name} because it's not a function!`);
+                }
+            }
+            catch(err) {
+                CordAPI.Logging.Error(`Failed to Null Patch Method: ${name}\nException: ${err}\nMake an issue report with this on the github.`);
+            }
+        },
         PatchMethod: function(method, name, override) 
         {
             try 
@@ -111,12 +125,18 @@ CordAPI =
         },
         FirePluginEvent: function(type, parameters)
         {
-            for(var i = 0; i < this.InjectedPlugins.length; i++)
+            try
             {
-                var plugin = this.InjectedPlugins[i];
-                if (plugin.OnEventCalled && typeof plugin.OnEventCalled == 'function') {
-                    plugin.OnEventCalled(type, parameters);
+                for(var i = 0; i < this.InjectedPlugins.length; i++)
+                {
+                    var plugin = this.InjectedPlugins[i];
+                    if (plugin.OnEventCalled && typeof plugin.OnEventCalled == 'function') {
+                        plugin.OnEventCalled(type, parameters);
+                    }
                 }
+            }
+            catch(err) {
+                CordAPI.Logging.Error(`Failed to fire plugin event ${type} with ${parameters.length} parameter(s)\nException: ${err}\nMake an issue report with this on the github.`);
             }
         },
         HandlePluginEvents: function()
@@ -132,7 +152,9 @@ CordAPI =
                     return result.callOriginalMethod(result.methodArguments);
                 });
             }
-            catch(err) {}
+            catch(err) {
+                CordAPI.Logging.Error(`Failed to handle plugin events\nException: ${err}\nMake an issue report with this on the github.`);
+            }
         }
     },
     Requests:

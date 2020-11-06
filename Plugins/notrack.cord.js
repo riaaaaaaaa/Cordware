@@ -11,7 +11,7 @@ module.exports = new Plugin({
         var post = CordAPI.Modding.FilterWebpackModule("post");
         CordAPI.Modding.PatchMethod(post, 'post', (result) => 
         {
-            result.methodArguments[0].url = b.methodArguments[0].url.replace("science", "");
+            result.methodArguments[0].url = result.methodArguments[0].url.replace("science", "");
             
             return result.callOriginalMethod(result.methodArguments);
         });

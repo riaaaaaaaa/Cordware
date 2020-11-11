@@ -5,9 +5,9 @@ module.exports = new Plugin({
     Name: "Anti Mute Spoofer",
     Author: "Yaekith",
     Description: "This plugin prevents the usage of the ws mute spoofer thing, since it's fucking annoying as fuck.",
-    Version: 1.0,
     OriginURL: "",
-    OnInjection: function() {
+    OnInjection: function() 
+    {
         try 
         {
             var dispatch = CordAPI.Modding.FilterWebpackModule("dispatch");

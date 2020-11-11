@@ -4,10 +4,11 @@ module.exports = new Plugin({
     Name: "Auto play gifs",
     Author: "Yaekith",
     Description: "This plugin will auto play gif profile pictures",
-    Version: 1.0,
     OriginURL: "",
-    OnInjection: function() {
-        setInterval(() => {
+    OnInjection: function() 
+    {
+        setInterval(() => 
+        {
             var images = document.getElementsByTagName("img");
             if (images.length > 0)
             {
@@ -21,7 +22,8 @@ module.exports = new Plugin({
                         {
                             var userID = source.split('/')[4].split('/')[0];
                             var animatedAvatar = window.ModuleUtil.FindModule('hasAnimatedAvatar').hasAnimatedAvatar(window.ModuleUtil.FindModule('getUser').getUser(userID));
-                            if (animatedAvatar) {
+                            if (animatedAvatar) 
+                            {
                                 if (source.includes(".png")) {
                                     image.src = source.replace('.png', '.gif');
                                 } 

@@ -5,9 +5,9 @@ module.exports = new Plugin({
     Name: "DM Notify",
     Author: "Yaekith",
     Description: "This plugin notifies you when someone is about to dm you.",
-    Version: 1.0,
     OriginURL: "",
-    OnInjection: function() {
+    OnInjection: function() 
+    {
         try 
         {
             var dispatch = CordAPI.Modding.FilterWebpackModule("dispatch");

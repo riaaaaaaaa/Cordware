@@ -5,7 +5,6 @@ module.exports = new Plugin({
     Name: "Last Read",
     Author: "Yaekith",
     Description: "This plugin gives you the closest thing you can get to read receipts on discord",
-    Version: 1.0,
     OriginURL: "",
     OnInjection: function() {
         try 

@@ -5,9 +5,9 @@ module.exports = new Plugin({
     Name: "No Track",
     Author: "Prevent discord from tracking you with /science",
     Description: "Yaekith",
-    Version: 1.0,
     OriginURL: "",
-    OnInjection: function() {
+    OnInjection: function() 
+    {
         var post = CordAPI.Modding.FilterWebpackModule("post");
         CordAPI.Modding.PatchMethod(post, 'post', (result) => 
         {

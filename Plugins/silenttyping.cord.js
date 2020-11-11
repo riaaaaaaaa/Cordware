@@ -10,7 +10,7 @@ module.exports = new Plugin({
     OnInjection: function() 
     {
         try {
-            CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping');
+            CordAPI.Modding.PatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping', () => {});
         }
         catch { }
     }

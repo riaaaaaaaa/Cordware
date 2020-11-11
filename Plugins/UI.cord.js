@@ -1,6 +1,5 @@
 var Plugin = require('./plugin');
 var CordAPI = require('../API/API');
-var scrollableContainer;
 
 module.exports = new Plugin({
     Name: "User Interface Enhancements",
@@ -13,13 +12,11 @@ module.exports = new Plugin({
         {
             setInterval(() => 
             {
-                if (!scrollableContainer && CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer) {
-                    scrollableContainer = CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer;
-                }
-            
-                if (document.getElementsByClassName(scrollableContainer).length > 0)
+                var scrollableContainer = CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer;
+
+                if (scrollableContainer)
                 {
-                    if (scrollableContainer) 
+                    if (document.getElementsByClassName(scrollableContainer).length > 0) 
                     {
                         var elements = document.getElementsByClassName(scrollableContainer);
                         for(var elem in elements) 
@@ -29,7 +26,7 @@ module.exports = new Plugin({
                             }
                         } 
                     }
-                } 
+                }    
             }, 1);
         }
         catch { }

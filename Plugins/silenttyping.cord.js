@@ -1,5 +1,6 @@
 var Plugin = require('./plugin');
 var CordAPI = require('../API/API');
+var Patched = false;
 
 module.exports = new Plugin({
     Name: "Silent Typing",
@@ -8,6 +9,13 @@ module.exports = new Plugin({
     Version: 1.0,
     OriginURL: "",
     OnInjection: function() {
-        CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping');
+        setInterval(() => 
+        {
+            if (!Patched && CordAPI.Modding.FilterWebpackModule("startTyping").startTyping) 
+            {
+                CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping');
+                Patched = true;
+            }
+        }, 1);
     }
 })

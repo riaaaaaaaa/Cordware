@@ -99,7 +99,7 @@ CordAPI =
                 var plugin = require(path);
                 this.InjectedPlugins[plugin.Name] = plugin;
                 this.InjectedPlugins[plugin.Name].OnInjection();
-                CordAPI.Logging.Log(`Loaded ${plugin.Name} by ${plugin.Author} v${plugin.Version}`);
+                CordAPI.Logging.Log(`Loaded ${plugin.Name} by ${plugin.Author} | ${plugin.description}`);
             }
             catch (error) {
                 CordAPI.Logging.Error(`Failed to load plugins\nException: ${error}\nMake an issue report with this on the github.`);

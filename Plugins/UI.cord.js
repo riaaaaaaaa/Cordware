@@ -9,25 +9,29 @@ module.exports = new Plugin({
     OriginURL: "",
     OnInjection: function() 
     {  
-        setInterval(() => 
+        try 
         {
-            if (!scrollableContainer && CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer) {
-                scrollableContainer = CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer;
-            }
-        
-            if (document.getElementsByClassName(scrollableContainer).length > 0)
+            setInterval(() => 
             {
-                if (scrollableContainer) 
-                {
-                    var elements = document.getElementsByClassName(scrollableContainer);
-                    for(var elem in elements) 
-                    {
-                        if (elements[elem] && elements[elem].className) {
-                            elements[elem].className = elements[elem].className.replace(scrollableContainer, "");
-                        }
-                    } 
+                if (!scrollableContainer && CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer) {
+                    scrollableContainer = CordAPI.Modding.FilterWebpackModule("scrollableContainer").scrollableContainer;
                 }
-            } 
-        }, 1);
+            
+                if (document.getElementsByClassName(scrollableContainer).length > 0)
+                {
+                    if (scrollableContainer) 
+                    {
+                        var elements = document.getElementsByClassName(scrollableContainer);
+                        for(var elem in elements) 
+                        {
+                            if (elements[elem] && elements[elem].className) {
+                                elements[elem].className = elements[elem].className.replace(scrollableContainer, "");
+                            }
+                        } 
+                    }
+                } 
+            }, 1);
+        }
+        catch { }
     }
 })

@@ -9,13 +9,9 @@ module.exports = new Plugin({
     OriginURL: "",
     OnInjection: function() 
     {
-        setInterval(() => 
-        {
-            if (!Patched && CordAPI.Modding.FilterWebpackModule("startTyping").startTyping) 
-            {
-                CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping');
-                Patched = true;
-            }
-        }, 1);
+        try {
+            CordAPI.Modding.NullPatchMethod(CordAPI.Modding.FilterWebpackModule("startTyping"), 'startTyping');
+        }
+        catch { }
     }
 })

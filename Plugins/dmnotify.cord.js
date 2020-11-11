@@ -20,19 +20,19 @@ module.exports = new Plugin({
                         var userId = result.methodArguments[0].userId;
                         var user = CordAPI.Modding.FilterWebpackModule("getUser").getUser(userId);
                         var channel = CordAPI.Modding.FilterWebpackModule("getChannel").getChannel(channelId);
-                        if (channel) 
+                        if (channel && channel.type) 
                         {
                             switch(channel.type)
                             {
                                 case 1:
-                                    new Notification("Cordware - DM Notifier", {
-                                        body: `${user.username}#${user.discriminator} is about to directly message you`
-                                    });
+                                new Notification("Cordware - DM Notifier", {
+                                    body: `${user.username}#${user.discriminator} is about to directly message you`
+                                });
                                 break;
                                 case 3:
-                                    new Notification("Cordware - DM Notifier", {
-                                        body: `${user.username}#${user.discriminator} is about to message in group chat: ${channel.name}`
-                                    });
+                                new Notification("Cordware - DM Notifier", {
+                                    body: `${user.username}#${user.discriminator} is about to message in group chat: ${channel.name}`
+                                });
                                 break;
                             }
                         }

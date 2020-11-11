@@ -185,6 +185,18 @@ CordAPI =
                 }
             }
             request.send(body);
+        },
+        MakeDeleteRequest(url, authorization, callback)
+        {
+            var request = new XMLHttpRequest();
+            request.addEventListener("load", () => {
+                callback(request.responseText);
+            });
+            request.open("DELETE", url);
+            if (authorization != "") {
+                request.setRequestHeader("Authorization", authorization);
+            }
+            request.send();
         }
     },
     UI:

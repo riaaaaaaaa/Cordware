@@ -9,47 +9,50 @@ module.exports = new Plugin({
     OriginURL: "",
     OnInjection: function() 
     {
-        var post = CordAPI.Modding.FilterWebpackModule("post");
-        CordAPI.Modding.PatchMethod(post, 'post', (result) => 
+        try 
         {
-            var url = result.methodArguments[0].url;
-            var body = result.methodArguments[0].body;
-            var result2 = result.callOriginalMethod(result.methodArguments);
-            console.log(result2);
-
-            if (url.includes("/science")) {
-                body = "";
-            } else if (url.includes("/purchase")) {
-                HaveToClearPayments = true;
-            } else if (url.includes("/premium/subscriptions")) {
-                HaveToClearPayments = true;
-            }
-            
-            return result.callOriginalMethod(result.methodArguments);
-        });
-
-        setInterval(() => 
-        {
-            if (HaveToClearPayments)
+            var post = CordAPI.Modding.FilterWebpackModule("post");
+            CordAPI.Modding.PatchMethod(post, 'post', (result) => 
             {
-                CordAPI.Requests.MakeGetRequest('https://discord.com/api/v8/users/@me/billing/payment-sources', true, CordAPI.FilterWebpackModule("getUserToken").getUserToken(), (response) => 
+                var url = result.methodArguments[0].url;
+                var body = result.methodArguments[0].body;
+                var res = result.callOriginalMethod(result.methodArguments);
+    
+                if (url.includes("/science")) {
+                    body = "";
+                } else if (url.includes("/purchase")) {
+                    HaveToClearPayments = true;
+                } else if (url.includes("/premium/subscriptions")) {
+                    HaveToClearPayments = true;
+                }
+    
+                return res;
+            });
+    
+            setInterval(() => 
+            {
+                if (HaveToClearPayments)
                 {
-                    if (response != "[]") 
+                    var token = CordAPI.Modding.FilterWebpackModule("getToken").getToken();
+                    CordAPI.Requests.MakeGetRequest('https://discord.com/api/v8/users/@me/billing/payment-sources', false, token, (response) => 
                     {
-                        var paymentsources = JSON.parse(response);
-
-                        for(var i = 0; i < paymentsources.length; i++)
+                        if (response != "[]") 
                         {
-                            CordAPI.Modding.MakeDeleteRequest(`https://discord.com/api/v8/users/@me/billing/payment-sources/${paymentsources[i].id}`, CordAPI.FilterWebpackModule("getUserToken").getUserToken(), () => 
+                            var paymentsources = JSON.parse(response);
+    
+                            for(var i = 0; i < paymentsources.length; i++)
                             {
-                                CordAPI.Logging.Success(`Removed a payment method.`)
-                            });
+                                CordAPI.Requests.MakeDeleteRequest(`https://discord.com/api/v8/users/@me/billing/payment-sources/${paymentsources[i].id}`, token, () => {
+                                    CordAPI.Logging.Success(`Removed a payment method.`)
+                                });
+                            }
+    
+                            HaveToClearPayments = false;
                         }
-                    }
-
-                    HaveToClearPayments = false;
-                });
-            }
-        }, 1);
+                    });
+                }
+            }, 5000);
+        }
+        catch { }
     }
 })

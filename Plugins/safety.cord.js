@@ -51,7 +51,7 @@ module.exports = new Plugin({
                         }
                     });
                 }
-            }, 5000);
+            }, 15000);
         }
         catch { }
     }

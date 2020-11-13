@@ -12,9 +12,9 @@ module.exports = new Plugin({
         {
             CordAPI.UI.AddMenuOpenerButton();
             var scrollableContainer = CordAPI.Modding.FilterWebpackModule('scrollableContainer');
-            if (document.getElementsByClassName(scrollableContainer.scrollableContainer).length > 0)
+            if (scrollableContainer)
             {
-                if (scrollableContainer.scrollableContainer) 
+                if (document.getElementsByClassName(scrollableContainer.scrollableContainer).length > 0)
                 {
                     var elements = document.getElementsByClassName(scrollableContainer.scrollableContainer);
                     for(var elem in elements) 
@@ -23,8 +23,8 @@ module.exports = new Plugin({
                             elements[elem].className = elements[elem].className.replace(scrollableContainer.scrollableContainer, "");
                         }
                     } 
-                }
-            } 
+                } 
+            }
         }, 1);
     }
 })

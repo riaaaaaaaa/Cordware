@@ -234,68 +234,20 @@ CordAPI =
         AddMenuButtons(type) 
         {
             var elementHolster = document.getElementById('InsertMenuButtonsHere');
-            switch (type) {
-                case "Basement":
-                    elementHolster = document.getElementById('InsertBasementButtonsHere');
-                    this.AddMenuButton(elementHolster, "Join Blast", "Invite your friends and throw a tea party.", "https://i.imgur.com/lo7IiCL.png", () => { });
-                    this.AddMenuButton(elementHolster, "Leave Blast", "Come on guys, party's over, let's leave.", "https://i.imgur.com/KjcSy6v.png", () => { });
-                    this.AddMenuButton(elementHolster, "User Attack", "Commit immense crimes of harassment and cyber-bully some users.", "https://i.imgur.com/ToNtVxr.png", () => { });
-                    this.AddMenuButton(elementHolster, "Server Attack", "Commit war crimes on the western front of Discord.", "https://i.imgur.com/C05Q1yF.png", () => { });
-                    this.AddMenuButton(elementHolster, "Friend Attack", "Let's give people the chance to not be lonely for once.", "https://i.imgur.com/0eAdzU3.png", () => { });
-                break;
-                case "Attic":
-                    elementHolster = document.getElementById('InsertAtticButtonsHere');
-                    this.AddMenuButton(elementHolster, "Shibe", "Sends a cute picture of a shibe", "https://cdn.shibe.online/shibes/ac1360d2aabccd660fd87540016bd187b6d5ffca.jpg", () => window.CommandsAPI.Shibe());
-                    this.AddMenuButton(elementHolster, "Neko", "Sends a lewd picture of a neko", "https://cdn.nekos.life/lewd/lewd_neko_419.jpg", () => window.CommandsAPI.Neko());
-                    this.AddMenuButton(elementHolster, "Eval", "Eval any code you wish here!", "https://i.imgur.com/tyQJsqo.png", () => window.MenuAPI.EvalCode());
-                    this.AddMenuToggleButton(elementHolster, "Cordware Indicator", "Channel up all the energy possible to decide whether you want people to indicate that you're using Cordware or not.", "https://i.imgur.com/dE9I36L.jpg", (window.CordwareSettings.CordwareIndicator ? "Enabled" : "Disabled"), () => { window.CordwareSettings.CordwareIndicator = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.CordwareIndicator = false; window.CordwareConfiguration.SaveSettings(); });
-                break;
-                case "Quantum":
-                    elementHolster = document.getElementById('InsertQuantumButtonsHere');
-                    this.AddMenuButton(elementHolster, "Mention Everyone", "Bypass the restriction on @everyone in any guild.", "https://webstockreview.net/images/clipart-phone-email-address-4.png", () => window.Secrets.TryMentionEveryone());
-                    this.AddMenuButton(elementHolster, "Block Bypass", "Talk to people you've blocked, without them being able to reply, isn't discord nice?", "https://i.ibb.co/C657F45/attack.png", () => window.MenuAPI.BlockBypass());
-                    this.AddMenuButton(elementHolster, "Outage", "Target the current selected server and become God.", "https://i.imgur.com/mfO0ViH.png", () => window.MenuAPI.Outage());
-                    this.AddMenuButton(elementHolster, "???", "Break Reality, become God and rule over anyone you wish.", "https://media1.tenor.com/images/019ebaf445dbd03904199c18262df707/tenor.gif", () => window.DisconnectMode());
-                    this.AddMenuToggleButton(elementHolster, "Silent Typing", "Enable/Disable Silent Typing. (Other users can't see you type while this is enabled)", "https://i.imgur.com/vaTpgUa.png", (window.CordwareSettings.SilentTyping ? "Enabled" : "Disabled"), () => { window.CordwareSettings.SilentTyping = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.SilentTyping = false; window.CordwareConfiguration.SaveSettings(); });
-                
-                    if (window._CordwareStorage.PreviousToken == "") {
-                        this.AddMenuButton(elementHolster, "Possess", "Bring up all the energy you have, and possess a user's account.", "https://i.imgur.com/i1U8K0y.png", () => window.MenuAPI.Possess());
-                    } else {
-                        this.AddMenuButton(elementHolster, "Restore", "Restore yourself, become a human again after possessing someone.", "https://i.imgur.com/i1U8K0y.png", () => window.MenuAPI.Possess());
-                    }
-
-                    this.AddMenuToggleButton(elementHolster, "Encryption", "Enable/Disable Encryption for all messages sent, other Cordware client users will automatically decrypt this data if encryption is enabled on their side too.", "https://i.imgur.com/9gDwjFd.png", (window.CordwareSettings.EncryptMessages ? "Enabled" : "Disabled"), () => { window.CordwareSettings.EncryptMessages = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.EncryptMessages = false; window.CordwareConfiguration.SaveSettings() })
-                    this.AddMenuToggleButton(elementHolster, "Socket Spoofer", "Enable/Disable the gateway socket spoofer, this will automatically spoof data sent to the gateway and manipulate it to your liking instead of usually transmitted information.", "https://i.imgur.com/ELpQfoQ.gif", (window.CordwareSettings.SocketSpoofer ? "Enabled" : "Disabled"), () => { window.CordwareSettings.SocketSpoofer = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.SocketSpoofer = false; window.CordwareConfiguration.SaveSettings(); })
-                    this.AddMenuToggleButton(elementHolster, "Stream Spoofer", "This feature will constantly spoof your stream as paused when it's not.", "https://i.imgur.com/pYFAL1m.gif", (window.CordwareSettings.StreamSpoofer ? "Enabled" : "Disabled"), () => { window.CordwareSettings.StreamSpoofer = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.StreamSpoofer = false; window.CordwareConfiguration.SaveSettings(); })
-                    this.AddMenuToggleButton(elementHolster, "Anti Phone Lock", "Prevent discord's security systems from phone locking your account, using a new exploit.", "https://i.imgur.com/eB9sOJf.png", (window.CordwareSettings.AntiLockExploit ? "Enabled" : "Disabled"), () => { window.CordwareSettings.AntiLockExploit = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.AntiLockExploit = false; window.CordwareConfiguration.SaveSettings(); });
-                    this.AddMenuToggleButton(elementHolster, "Anti Outage", "Prevent the discord server outage exploit from affecting you, in any server.", "https://i.imgur.com/id1HTxu.png", (window.CordwareSettings.AntiOutageExploit ? "Enabled" : "Disabled"), () => { window.CordwareSettings.AntiOutageExploit = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.AntiOutageExploit = false; window.CordwareConfiguration.SaveSettings(); });
-                    this.AddMenuToggleButton(elementHolster, "Anti Disconnect", "Prevent other users from disconnecting you from any voice channel. (You can not run this on private channels you've been moved into.)", "https://i.pinimg.com/originals/1a/bb/e9/1abbe9b61eac9e87c845c4f2e1ea1356.gif", (window.CordwareSettings.AntiDisconnect ? "Enabled" : "Disabled"), () => { window.CordwareSettings.AntiDisconnect = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.AntiDisconnect = false; window.CordwareConfiguration.SaveSettings(); });
-                    this.AddMenuToggleButton(elementHolster, "Anti Exploit", "Prevent all known exploits from affecting you.", "https://i.imgur.com/2gdM7qH.png", (window.CordwareSettings.AntiExploit ? "Enabled" : "Disabled"), () => { window.CordwareSettings.AntiExploit = true; window.CordwareConfiguration.SaveSettings(); }, () => { window.CordwareSettings.AntiExploit = false; window.CordwareConfiguration.SaveSettings(); });
+            switch (type) 
+            {
+                case "Settings":
+                    elementHolster = document.getElementById('InsertSettingsButtonsHere');
+                    //this.AddMenuButton(elementHolster, "Mention Everyone", "Bypass the restriction on @everyone in any guild.", "https://webstockreview.net/images/clipart-phone-email-address-4.png", () => window.Secrets.TryMentionEveryone());
                 break;
                 case "Menu":
                     elementHolster = document.getElementById('InsertMenuButtonsHere');
 
-                    this.AddMenuButton(elementHolster, "Quantum", "Discover the secrets of this vast world, uncover the impossible and learn to overcome all challenges.", "https://i.imgur.com/4b4h7Kq.png", () => {
-                        this.FadeOut(document.getElementById("MainCordwareWindow"));
+                    this.AddMenuButton(elementHolster, "Configuration", "Here you can configure cordware and modify the configuration for some plugins.", "https://i.imgur.com/4b4h7Kq.png", () => 
+                    {
+                        this.FadeOut(document.getElementById("SettingsWindow"));
                         var CurrentUsertag = CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().username + "#" + CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().discriminator;
-                        this.CreateMenu("QuantumWindow", "Quantum", `Achieving the impossible and heading forward towards victory. <br>Welcome scientist, ${CurrentUsertag}`, "InsertQuantumButtonsHere", "https://i.imgur.com/FLdcbL8.gif", () => this.AddMenuButtons("Quantum"));
-                    });
-
-                    this.AddMenuButton(elementHolster, "Basement", "Head your way down to the basement, where the deepest darkest secrets of Cordware are kept (We still have raiding abilities)", "https://www.dreamdictionary.org/wp-content/uploads/2020/01/83a8fc4e-4acd-4212-8d00-1d9560afb41a.jpg", () => {
-                        this.FadeOut(document.getElementById("MainCordwareWindow"));
-                        var CurrentUsertag = CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().username + "#" + CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().discriminator;
-                        this.CreateMenu("BasementWindow", "The Basement", `What's down here?<br>Welcome scientist, ${CurrentUsertag}`, "InsertBasementButtonsHere", "https://i.imgur.com/NcdmKmU.gif", () => this.AddMenuButtons("Basement"));
-                    });
-
-                    this.AddMenuButton(elementHolster, "Attic", "Open the attic and head into the room of memories that have been kept away.", "https://hanatimber.com.au/wp-content/uploads/2019/06/Timber-Floor-Sydney-32-720x380.jpg", () => {
-                        this.FadeOut(document.getElementById("MainCordwareWindow"));
-                        var CurrentUsertag = CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().username + "#" + CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().discriminator;
-                        this.CreateMenu("AtticWindow", "The Attic", `What's up here?<br>Welcome scientist, ${CurrentUsertag}`, "InsertAtticButtonsHere", "https://i.imgur.com/8mOG9DM.gif", () => this.AddMenuButtons("Attic"));
-                    });
-
-                    this.AddMenuButton(elementHolster, "Terminal", "Start a new terminal session and enter some commands.", "https://cdn.discordapp.com/attachments/728975000756813845/730357693067296828/bill_cipher.gif", () => {
-                        this.FadeOut(document.getElementById("MainCordwareWindow"));
-                        window.MenuAPI.OpenTerminalWindow();
+                        this.CreateMenu("SettingsWindow", "Settings", `Cordware: Doing discord's job.<br>Welcome scientist, ${CurrentUsertag}`, "InsertSettingsButtonsHere", "https://i.imgur.com/FLdcbL8.gif", () => this.AddMenuButtons("Settings"));
                     });
                 break;
             }
@@ -303,7 +255,7 @@ CordAPI =
         AddMenuButton(Holster, ButtonTitle, ButtonDescription, ButtonIconURL, callback) 
         {
             if (document.getElementById(ButtonTitle)) return;
-            var element = this.InjectHTML(`<div style="width: 92%" class="card-o7rAq- clickable-ya6Upc cardPrimaryEditable-3KtE4g card-3Qj_Yx"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><img alt="" src="${ButtonIconURL}" class="iconWrapper-lS1uig flexChild-faoVW3" style="flex: 0 0 auto;"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignStretch-DpGPf3 noWrap-3jynv6 wrapper-1sov8s" style="flex: 1 1 auto;"><div class="flex-1xMQg5 flex-1O1GKY vertical-V37hAW flex-1O1GKY directionColumn-35P_nr justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><h3 class="secondaryHeader-2oeRPO base-1x0h_U size16-1P40sf">${ButtonTitle}</h3><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs wrap-ZIn9Iy" style="flex: 1 1 auto;"><div class="detailsWrapper-3XSaoN"><div class="colorHeaderSecondary-3Sp3Ft size12-3cLvbJ">${ButtonDescription}</div></div></div></div></div><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyEnd-2E6vba alignCenter-1dQNNs noWrap-3jynv6 flexChild-faoVW3" style="flex: 0 0 auto;" id="${ButtonTitle}"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs noWrap-3jynv6" style="flex: 1 1 auto;"><div class="colorStandard-2KCXvj size14-e6ZScH">Execute</div><svg class="caret-Ld-w32" aria-hidden="false" width="10" height="10" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><polygon fill="currentColor" fill-rule="nonzero" points="8.47 2 6.12 4.35 13.753 12 6.12 19.65 8.47 22 18.47 12"></polygon><polygon points="0 0 24 0 24 24 0 24"></polygon></g></svg></div></div></div></div>`);
+            var element = this.InjectHTML(`<div style="width: 90%" class="card-o7rAq- clickable-ya6Upc cardPrimaryEditable-3KtE4g card-3Qj_Yx"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><img alt="" src="${ButtonIconURL}" class="iconWrapper-lS1uig flexChild-faoVW3" style="flex: 0 0 auto;"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignStretch-DpGPf3 noWrap-3jynv6 wrapper-1sov8s" style="flex: 1 1 auto;"><div class="flex-1xMQg5 flex-1O1GKY vertical-V37hAW flex-1O1GKY directionColumn-35P_nr justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><h3 class="secondaryHeader-2oeRPO base-1x0h_U size16-1P40sf">${ButtonTitle}</h3><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs wrap-ZIn9Iy" style="flex: 1 1 auto;"><div class="detailsWrapper-3XSaoN"><div class="colorHeaderSecondary-3Sp3Ft size12-3cLvbJ">${ButtonDescription}</div></div></div></div></div><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyEnd-2E6vba alignCenter-1dQNNs noWrap-3jynv6 flexChild-faoVW3" style="flex: 0 0 auto;" id="${ButtonTitle}"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs noWrap-3jynv6" style="flex: 1 1 auto;"><div class="colorStandard-2KCXvj size14-e6ZScH">Execute</div><svg class="caret-Ld-w32" aria-hidden="false" width="10" height="10" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><polygon fill="currentColor" fill-rule="nonzero" points="8.47 2 6.12 4.35 13.753 12 6.12 19.65 8.47 22 18.47 12"></polygon><polygon points="0 0 24 0 24 24 0 24"></polygon></g></svg></div></div></div></div>`);
             Holster.appendChild(element);
             var Button = document.getElementById(ButtonTitle);
             Button.addEventListener("click", () => callback());
@@ -311,7 +263,7 @@ CordAPI =
         AddMenuToggleButton(Holster, ButtonTitle, ButtonDescription, ButtonIconURL, Default = "Enabled", ToggleAction, UntoggleAction) 
         {
             if (document.getElementById(ButtonTitle)) return;
-            var element = this.InjectHTML(`<div style="width: 92%" class="card-o7rAq- clickable-ya6Upc cardPrimaryEditable-3KtE4g card-3Qj_Yx"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><img alt="" src="${ButtonIconURL}" class="iconWrapper-lS1uig flexChild-faoVW3" style="flex: 0 0 auto;"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignStretch-DpGPf3 noWrap-3jynv6 wrapper-1sov8s" style="flex: 1 1 auto;"><div class="flex-1xMQg5 flex-1O1GKY vertical-V37hAW flex-1O1GKY directionColumn-35P_nr justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><h3 class="secondaryHeader-2oeRPO base-1x0h_U size16-1P40sf">${ButtonTitle}</h3><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs wrap-ZIn9Iy" style="flex: 1 1 auto;"><div class="detailsWrapper-3XSaoN"><div class="colorHeaderSecondary-3Sp3Ft size12-3cLvbJ">${ButtonDescription}</div></div></div></div></div><div class="flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueChecked-m-4IJZ value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX" id="${ButtonTitle}" tabindex="0" style="flex: 0 0 auto;"><input class="checkboxEnabled-CtinEn checkbox-2tyjJg" type="checkbox" tabindex="-1"></div></div></div>`);
+            var element = this.InjectHTML(`<div style="width: 90%" class="card-o7rAq- clickable-ya6Upc cardPrimaryEditable-3KtE4g card-3Qj_Yx"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><img alt="" src="${ButtonIconURL}" class="iconWrapper-lS1uig flexChild-faoVW3" style="flex: 0 0 auto;"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignStretch-DpGPf3 noWrap-3jynv6 wrapper-1sov8s" style="flex: 1 1 auto;"><div class="flex-1xMQg5 flex-1O1GKY vertical-V37hAW flex-1O1GKY directionColumn-35P_nr justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><h3 class="secondaryHeader-2oeRPO base-1x0h_U size16-1P40sf">${ButtonTitle}</h3><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs wrap-ZIn9Iy" style="flex: 1 1 auto;"><div class="detailsWrapper-3XSaoN"><div class="colorHeaderSecondary-3Sp3Ft size12-3cLvbJ">${ButtonDescription}</div></div></div></div></div><div class="flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueChecked-m-4IJZ value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX" id="${ButtonTitle}" tabindex="0" style="flex: 0 0 auto;"><input class="checkboxEnabled-CtinEn checkbox-2tyjJg" type="checkbox" tabindex="-1"></div></div></div>`);
             Holster.appendChild(element);
             var ToggleButton = document.getElementById(ButtonTitle);
             if (Default == "Enabled") ToggleButton.className = "flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueChecked-m-4IJZ value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX";
@@ -334,6 +286,15 @@ CordAPI =
             var avatarImageURL = `https://cdn.discordapp.com/avatars/${CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().id}/${CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().avatar}.${PfpExtension}`
             this.CreateMenu("MainCordwareWindow", "Cordware", `Welcome, ${CurrentUsertag}`, "InsertMenuButtonsHere", avatarImageURL, () => this.AddMenuButtons("Menu"));
         },
+        AddMenuOpenerButton()
+        {
+            if (document.getElementById('MenuButton')) return;
+            var holster = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.sidebar-2K8pFh > section > div.container-3baos1 > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6"); //Where the mic, deafen and settings buttons are.
+            if (!holster) return;
+            var menuButton = CordAPI.UI.InjectHTML(`<button aria-label="Menu" role="switch" type="button" class="button-14-BFJ enabled-2cQ-u7 button-38aScr lookBlank-3eh9lL colorBrand-3pXr91 grow-q77ONN" id="MenuButton"><img src="https://i.imgur.com/E58UBzg.png" style="width: 25px; height: 25px;"></button>`);
+            holster.appendChild(menuButton);
+            document.getElementById('MenuButton').addEventListener("click", (() => { CordAPI.UI.OpenMenu(); }));
+        }
     }
 };
 

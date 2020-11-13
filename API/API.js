@@ -127,9 +127,9 @@ CordAPI =
         {
             try
             {
-                for(var i = 0; i < this.InjectedPlugins.length; i++)
+                for(var module in this.GetPlugins())
                 {
-                    var plugin = this.InjectedPlugins[i];
+                    var plugin = this.GetPlugins()[module];
                     if (plugin.OnEventCalled && typeof plugin.OnEventCalled == 'function') {
                         plugin.OnEventCalled(type, parameters);
                     }
@@ -238,7 +238,8 @@ CordAPI =
             {
                 case "Settings":
                     elementHolster = document.getElementById('InsertSettingsButtonsHere');
-                    //this.AddMenuButton(elementHolster, "Mention Everyone", "Bypass the restriction on @everyone in any guild.", "https://webstockreview.net/images/clipart-phone-email-address-4.png", () => window.Secrets.TryMentionEveryone());
+
+                    this.AddMenuButton(elementHolster, "Mention Everyone", "Bypass the restriction on @everyone in any guild.", "https://webstockreview.net/images/clipart-phone-email-address-4.png", () => window.Secrets.TryMentionEveryone());
                 break;
                 case "Menu":
                     elementHolster = document.getElementById('InsertMenuButtonsHere');
@@ -250,7 +251,7 @@ CordAPI =
                         this.CreateMenu("SettingsWindow", "Settings", `Cordware: Doing discord's job.<br>Welcome scientist, ${CurrentUsertag}`, "InsertSettingsButtonsHere", "https://i.imgur.com/FLdcbL8.gif", () => this.AddMenuButtons("Settings"));
                     });
 
-                    this.AddMenuButton(elementHolster, "Plugins", "Here you can enable/disable cordware plugins you have installed.", "https://i.imgur.com/4b4h7Kq.png", () => 
+                    this.AddMenuButton(elementHolster, "Plugins", "Here you can enable/disable cordware plugins you have installed.", "https://i.imgur.com/4PkPhhY.jpg", () => 
                     {
                         this.FadeOut(document.getElementById("MainCordwareWindow"));
                         this.CreateMenu("PluginsWindow", "Plugins", `The Laboratory.`, "InsertPluginButtonsHere", "https://i.imgur.com/8mOG9DM.gif", () => this.AddMenuButtons("Plugins"));
@@ -258,11 +259,10 @@ CordAPI =
                 break;
                 case "Plugins":
                     elementHolster = document.getElementById('InsertPluginButtonsHere');
-
-                    for(var i = 0; i < CordAPI.Modding.InjectedPlugins; i++)
+                    console.log('hi im here');
+                    for(var module in CordAPI.Modding.GetPlugins())
                     {
-                        var plugin = CordAPI.Modding.InjectedPlugins[i];
-
+                        var plugin = CordAPI.Modding.GetPlugins()[module];
                         this.AddMenuToggleButton(elementHolster, plugin.Name, plugin.Description, plugin.Logo, "Enabled", () => {
                             plugin.OnEjection();
                         }, () => {
@@ -283,18 +283,27 @@ CordAPI =
         AddMenuToggleButton(Holster, ButtonTitle, ButtonDescription, ButtonIconURL, Default = "Enabled", ToggleAction, UntoggleAction) 
         {
             if (document.getElementById(ButtonTitle)) return;
-            var element = this.InjectHTML(`<div style="width: 90%" class="card-o7rAq- clickable-ya6Upc cardPrimaryEditable-3KtE4g card-3Qj_Yx"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><img alt="" src="${ButtonIconURL}" class="iconWrapper-lS1uig flexChild-faoVW3" style="flex: 0 0 auto;"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignStretch-DpGPf3 noWrap-3jynv6 wrapper-1sov8s" style="flex: 1 1 auto;"><div class="flex-1xMQg5 flex-1O1GKY vertical-V37hAW flex-1O1GKY directionColumn-35P_nr justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><h3 class="secondaryHeader-2oeRPO base-1x0h_U size16-1P40sf">${ButtonTitle}</h3><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs wrap-ZIn9Iy" style="flex: 1 1 auto;"><div class="detailsWrapper-3XSaoN"><div class="colorHeaderSecondary-3Sp3Ft size12-3cLvbJ">${ButtonDescription}</div></div></div></div></div><div class="flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueChecked-m-4IJZ value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX" id="${ButtonTitle}" tabindex="0" style="flex: 0 0 auto;"><input class="checkboxEnabled-CtinEn checkbox-2tyjJg" type="checkbox" tabindex="-1"></div></div></div>`);
+            var element = this.InjectHTML(`<div style="width: 90%" class="card-o7rAq- clickable-ya6Upc cardPrimaryEditable-3KtE4g card-3Qj_Yx"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><img alt="" src="${ButtonIconURL}" class="iconWrapper-lS1uig flexChild-faoVW3" style="flex: 0 0 auto;"><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignStretch-DpGPf3 noWrap-3jynv6 wrapper-1sov8s" style="flex: 1 1 auto;"><div class="flex-1xMQg5 flex-1O1GKY vertical-V37hAW flex-1O1GKY directionColumn-35P_nr justifyStart-2NDFzi alignStretch-DpGPf3 noWrap-3jynv6" style="flex: 1 1 auto;"><h3 class="secondaryHeader-2oeRPO base-1x0h_U size16-1P40sf">${ButtonTitle}</h3><div class="flex-1xMQg5 flex-1O1GKY horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyStart-2NDFzi alignCenter-1dQNNs wrap-ZIn9Iy" style="flex: 1 1 auto;"><div class="detailsWrapper-3XSaoN"><div class="colorHeaderSecondary-3Sp3Ft size12-3cLvbJ">${ButtonDescription}</div></div></div></div></div><div class="control-2BBjec" id="${ButtonTitle}"><div class="container-3auIfb" tabindex="-1" style="opacity: 1; background-color: rgb(67, 181, 129);"><svg class="slider-TkfMQL" viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet" style="left: 12px;"><rect fill="white" x="4" y="0" height="20" width="20" rx="10"></rect><svg viewBox="0 0 20 20" fill="none"><path fill="rgba(67, 181, 129, 1)" d="M7.89561 14.8538L6.30462 13.2629L14.3099 5.25755L15.9009 6.84854L7.89561 14.8538Z"></path><path fill="rgba(67, 181, 129, 1)" d="M4.08643 11.0903L5.67742 9.49929L9.4485 13.2704L7.85751 14.8614L4.08643 11.0903Z"></path></svg></svg><input id="uid_238" type="checkbox" class="input-rwLH4i" tabindex="0" checked=""></div></div></div></div>`);
             Holster.appendChild(element);
             var ToggleButton = document.getElementById(ButtonTitle);
-            if (Default == "Enabled") ToggleButton.className = "flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueChecked-m-4IJZ value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX";
-            else ToggleButton.className = "flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueUnchecked-2lU_20 value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX";
-            ToggleButton.addEventListener("click", () => {
-                if (ToggleButton.className == "flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueUnchecked-2lU_20 value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX") {
-                    ToggleButton.className = "flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueChecked-m-4IJZ value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX";
+            if (Default == "Enabled") {
+                ToggleButton.outerHTML = `<div class="control-2BBjec" id="${ButtonTitle}"><div class="container-3auIfb" tabindex="-1" style="opacity: 1; background-color: rgb(67, 181, 129);"><svg class="slider-TkfMQL" viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet" style="left: 12px;"><rect fill="white" x="4" y="0" height="20" width="20" rx="10"></rect><svg viewBox="0 0 20 20" fill="none"><path fill="rgba(67, 181, 129, 1)" d="M7.89561 14.8538L6.30462 13.2629L14.3099 5.25755L15.9009 6.84854L7.89561 14.8538Z"></path><path fill="rgba(67, 181, 129, 1)" d="M4.08643 11.0903L5.67742 9.49929L9.4485 13.2704L7.85751 14.8614L4.08643 11.0903Z"></path></svg></svg><input id="uid_238" type="checkbox" class="input-rwLH4i" tabindex="0" checked=""></div></div>`;
+            } 
+            else {
+                ToggleButton.outerHTML = `<div class="control-2BBjec" id="${ButtonTitle}"><div class="container-3auIfb" tabindex="-1" style="opacity: 1; background-color: rgb(114, 118, 125);"><svg class="slider-TkfMQL" viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet" style="left: -3px;"><rect fill="white" x="4" y="0" height="20" width="20" rx="10"></rect><svg viewBox="0 0 20 20" fill="none"><path fill="rgba(114, 118, 125, 1)" d="M5.13231 6.72963L6.7233 5.13864L14.855 13.2704L13.264 14.8614L5.13231 6.72963Z"></path><path fill="rgba(114, 118, 125, 1)" d="M13.2704 5.13864L14.8614 6.72963L6.72963 14.8614L5.13864 13.2704L13.2704 5.13864Z"></path></svg></svg><input id="uid_85" type="checkbox" class="input-rwLH4i" tabindex="0" checked=""></div></div>`;
+            }
+
+            ToggleButton.addEventListener('click', () => 
+            {
+                console.log('hi')
+                if (ToggleButton.outerHTML == `<div class="control-2BBjec" id="${ButtonTitle}"><div class="container-3auIfb" tabindex="-1" style="opacity: 1; background-color: rgb(114, 118, 125);"><svg class="slider-TkfMQL" viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet" style="left: -3px;"><rect fill="white" x="4" y="0" height="20" width="20" rx="10"></rect><svg viewBox="0 0 20 20" fill="none"><path fill="rgba(114, 118, 125, 1)" d="M5.13231 6.72963L6.7233 5.13864L14.855 13.2704L13.264 14.8614L5.13231 6.72963Z"></path><path fill="rgba(114, 118, 125, 1)" d="M13.2704 5.13864L14.8614 6.72963L6.72963 14.8614L5.13864 13.2704L13.2704 5.13864Z"></path></svg></svg><input id="uid_85" type="checkbox" class="input-rwLH4i" tabindex="0" checked=""></div></div>`) 
+                {
+                    ToggleButton.outerHTML = `<div class="control-2BBjec" id="${ButtonTitle}"><div class="container-3auIfb" tabindex="-1" style="opacity: 1; background-color: rgb(67, 181, 129);"><svg class="slider-TkfMQL" viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet" style="left: 12px;"><rect fill="white" x="4" y="0" height="20" width="20" rx="10"></rect><svg viewBox="0 0 20 20" fill="none"><path fill="rgba(67, 181, 129, 1)" d="M7.89561 14.8538L6.30462 13.2629L14.3099 5.25755L15.9009 6.84854L7.89561 14.8538Z"></path><path fill="rgba(67, 181, 129, 1)" d="M4.08643 11.0903L5.67742 9.49929L9.4485 13.2704L7.85751 14.8614L4.08643 11.0903Z"></path></svg></svg><input id="uid_238" type="checkbox" class="input-rwLH4i" tabindex="0" checked=""></div></div>`;
                     ToggleAction();
                 }
-                else {
-                    ToggleButton.className = "flexChild-faoVW3 switchEnabled-V2WDBB switch-3wwwcV valueUnchecked-2lU_20 value-2hFrkk sizeDefault-2YlOZr size-3rFEHg themeDefault-24hCdX";
+                else 
+                {
+                    ToggleButton.outerHTML = `<div class="control-2BBjec" id="${ButtonTitle}"><div class="container-3auIfb" tabindex="-1" style="opacity: 1; background-color: rgb(114, 118, 125);"><svg class="slider-TkfMQL" viewBox="0 0 28 20" preserveAspectRatio="xMinYMid meet" style="left: -3px;"><rect fill="white" x="4" y="0" height="20" width="20" rx="10"></rect><svg viewBox="0 0 20 20" fill="none"><path fill="rgba(114, 118, 125, 1)" d="M5.13231 6.72963L6.7233 5.13864L14.855 13.2704L13.264 14.8614L5.13231 6.72963Z"></path><path fill="rgba(114, 118, 125, 1)" d="M13.2704 5.13864L14.8614 6.72963L6.72963 14.8614L5.13864 13.2704L13.2704 5.13864Z"></path></svg></svg><input id="uid_85" type="checkbox" class="input-rwLH4i" tabindex="0" checked=""></div></div>`
                     UntoggleAction();
                 }
             });

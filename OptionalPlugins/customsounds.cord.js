@@ -8,6 +8,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin should replace discord official sounds with custom ones.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         try 

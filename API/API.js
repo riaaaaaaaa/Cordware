@@ -245,10 +245,30 @@ CordAPI =
 
                     this.AddMenuButton(elementHolster, "Configuration", "Here you can configure cordware and modify the configuration for some plugins.", "https://i.imgur.com/4b4h7Kq.png", () => 
                     {
-                        this.FadeOut(document.getElementById("SettingsWindow"));
+                        this.FadeOut(document.getElementById("MainCordwareWindow"));
                         var CurrentUsertag = CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().username + "#" + CordAPI.Modding.FilterWebpackModule("getCurrentUser").getCurrentUser().discriminator;
                         this.CreateMenu("SettingsWindow", "Settings", `Cordware: Doing discord's job.<br>Welcome scientist, ${CurrentUsertag}`, "InsertSettingsButtonsHere", "https://i.imgur.com/FLdcbL8.gif", () => this.AddMenuButtons("Settings"));
                     });
+
+                    this.AddMenuButton(elementHolster, "Plugins", "Here you can enable/disable cordware plugins you have installed.", "https://i.imgur.com/4b4h7Kq.png", () => 
+                    {
+                        this.FadeOut(document.getElementById("MainCordwareWindow"));
+                        this.CreateMenu("PluginsWindow", "Plugins", `The Laboratory.`, "InsertPluginButtonsHere", "https://i.imgur.com/8mOG9DM.gif", () => this.AddMenuButtons("Plugins"));
+                    });
+                break;
+                case "Plugins":
+                    elementHolster = document.getElementById('InsertPluginButtonsHere');
+
+                    for(var i = 0; i < CordAPI.Modding.InjectedPlugins; i++)
+                    {
+                        var plugin = CordAPI.Modding.InjectedPlugins[i];
+
+                        this.AddMenuToggleButton(elementHolster, plugin.Name, plugin.Description, plugin.Logo, "Enabled", () => {
+                            plugin.OnEjection();
+                        }, () => {
+                            plugin.OnInjection();
+                        });
+                    }
                 break;
             }
         },
@@ -291,7 +311,7 @@ CordAPI =
             if (document.getElementById('MenuButton')) return;
             var holster = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.sidebar-2K8pFh > section > div.container-3baos1 > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6"); //Where the mic, deafen and settings buttons are.
             if (!holster) return;
-            var menuButton = CordAPI.UI.InjectHTML(`<button aria-label="Menu" role="switch" type="button" class="button-14-BFJ enabled-2cQ-u7 button-38aScr lookBlank-3eh9lL colorBrand-3pXr91 grow-q77ONN" id="MenuButton"><img src="https://i.imgur.com/E58UBzg.png" style="width: 25px; height: 25px;"></button>`);
+            var menuButton = this.InjectHTML(`<button aria-label="Menu" role="switch" type="button" class="button-14-BFJ enabled-2cQ-u7 button-38aScr lookBlank-3eh9lL colorBrand-3pXr91 grow-q77ONN" id="MenuButton"><img src="https://i.imgur.com/E58UBzg.png" style="width: 25px; height: 25px;"></button>`);
             holster.appendChild(menuButton);
             document.getElementById('MenuButton').addEventListener("click", (() => { CordAPI.UI.OpenMenu(); }));
         }

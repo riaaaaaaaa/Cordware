@@ -6,6 +6,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "Just an experimental UI for cordware, based off Lazarus' Old Menu.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         setInterval(() => 

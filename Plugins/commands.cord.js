@@ -6,6 +6,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin gives you commands built into your discord client :^)",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         try 

@@ -6,6 +6,7 @@ module.exports = new Plugin({
     Author: "Example Bob",
     Description: "An example plugin.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() {
         //the function that gets called as soon as the plugin gets loaded, aka on Injection.
 

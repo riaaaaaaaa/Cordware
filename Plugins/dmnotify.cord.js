@@ -6,6 +6,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin notifies you when someone is about to dm you.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         try 

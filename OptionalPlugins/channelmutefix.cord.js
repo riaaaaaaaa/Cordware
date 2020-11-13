@@ -6,6 +6,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin should fix the fact that you can get mentioned in muted channels .-.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         var getMentionCount = CordAPI.Modding.FilterWebpackModule("getMentionCount");

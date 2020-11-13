@@ -6,6 +6,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin notifies you about server outages, with details on which servers.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         try 

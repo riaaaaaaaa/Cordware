@@ -7,6 +7,7 @@ module.exports = new Plugin({
     Author: "Safety Jim",
     Description: "This plugin should secure you more, removing your payment info after making purchases, etc.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         try 

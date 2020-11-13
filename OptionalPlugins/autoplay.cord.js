@@ -5,6 +5,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin will auto play gif profile pictures",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         setInterval(() => 

@@ -5,6 +5,7 @@ module.exports = new Plugin({
     Author: "Yaekith",
     Description: "This plugin should get rid of the shitty build override embeds in channel topics.",
     OriginURL: "",
+    Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
         setInterval(() => 

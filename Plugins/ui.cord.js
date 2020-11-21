@@ -9,23 +9,8 @@ module.exports = new Plugin({
     Logo: "https://i.imgur.com/4PkPhhY.jpg",
     OnInjection: function() 
     {
-        setInterval(() => 
-        {
+        setInterval(() => {
             CordAPI.UI.AddMenuOpenerButton();
-            var scrollableContainer = CordAPI.Modding.FilterWebpackModule('scrollableContainer');
-            if (scrollableContainer)
-            {
-                if (document.getElementsByClassName(scrollableContainer.scrollableContainer).length > 0)
-                {
-                    var elements = document.getElementsByClassName(scrollableContainer.scrollableContainer);
-                    for(var elem in elements) 
-                    {
-                        if (elements[elem].className != undefined) {
-                            elements[elem].className = elements[elem].className.replace(scrollableContainer.scrollableContainer, "");
-                        }
-                    } 
-                } 
-            }
         }, 1);
     }
 })
